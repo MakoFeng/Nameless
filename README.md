@@ -20,4 +20,4 @@
 
 ## 开源协议
 
-[Apache License 2.0](LICENSE)
+[MIT许可证](LICENSE)
