@@ -9,6 +9,7 @@
 - [RxAndroid](https://github.com/ReactiveX/RxAndroid )
 - [retrofit](https://github.com/square/retrofit)
 - [okhttp](https://github.com/square/okhttp)
+- [mosby](https://github.com/sockeqwe/mosby)
 
 
 ## 致谢
@@ -18,6 +19,7 @@
 
 
 
+
 ## 开源协议
 
-[MIT许可证](LICENSE)
+[MIT](LICENSE)
