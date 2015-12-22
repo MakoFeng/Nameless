@@ -12,18 +12,14 @@ import rx.Observable;
  */
 public interface GankApi {
 
-
-
     @GET("data/福利/" + GankFactory.meizhiSize + "/{page}")
     Observable<MeizhiData> getMeizhiData(
             @Path("page") int page);
-
 
     @GET("day/{year}/{month}/{day}")
     Observable<GankData> getGankData(
             @Path("year") int year,
             @Path("month") int month,
             @Path("day") int day);
-
 
 }

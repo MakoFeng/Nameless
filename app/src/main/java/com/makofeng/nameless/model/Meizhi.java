@@ -17,6 +17,4 @@ public class Meizhi {
     public Date updatedAt;
     public Date publishedAt;
 
-
-
 }

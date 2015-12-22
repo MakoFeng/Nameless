@@ -2,8 +2,9 @@ package com.makofeng.nameless.mvp.delegate;
 
 import android.os.Bundle;
 
-import com.liugcar.FunCar.mvp.presenters.MvpPresenter;
-import com.liugcar.FunCar.mvp.views.MvpView;
+import com.makofeng.nameless.mvp.presenter.MvpPresenter;
+import com.makofeng.nameless.mvp.views.MvpView;
+
 
 /**
  * Created by 冯浩 on 2015/7/21.
