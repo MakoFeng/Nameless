@@ -40,7 +40,7 @@ public class MainActivity extends MvpActivity<MeizhiView, MeizhiPresenter> imple
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
         initView();
-        presenter.initData(false);
+        presenter.initData(true);
 
 //        Observable<GankData> gankDataObservable = mGank.getGankData(2015, 12, 10);
 //
@@ -83,7 +83,7 @@ public class MainActivity extends MvpActivity<MeizhiView, MeizhiPresenter> imple
 
     @Override
     public void showLoading() {
-        swipeRefresh.setRefreshing(true);
+        mvState.setViewState(MultiStateView.VIEW_STATE_LOADING);
     }
 
     @Override
@@ -119,6 +119,6 @@ public class MainActivity extends MvpActivity<MeizhiView, MeizhiPresenter> imple
 
     @Override
     public void onRefresh() {
-        presenter.initData(true);
+        presenter.initData(false);
     }
 }
