@@ -15,9 +15,9 @@ android {
     signingConfigs {
         sign {
             storeFile file('Nameless.keystore')
-            storePassword '458699031'
-            keyAlias 'Nameless'
-            keyPassword '458699031'
+            storePassword '......'
+            keyAlias '......'
+            keyPassword '......'
         }
     }
 
@@ -47,11 +47,13 @@ dependencies {
     compile 'com.android.support:support-v4:23.0.1'
     compile 'com.android.support:design:23.0.1'
     compile 'com.android.support:recyclerview-v7:23.1.0'
+    compile 'com.android.support:cardview-v7:23.1.0'
 
     compile 'com.jakewharton:butterknife:7.0.1'
     compile 'io.reactivex:rxjava:1.0.14'
     compile 'io.reactivex:rxandroid:1.0.1'
 
+    compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.squareup.retrofit:retrofit:2.0.0-beta2'
     compile 'com.squareup.retrofit:converter-gson:2.0.0-beta2'
     compile 'com.squareup.retrofit:adapter-rxjava:2.0.0-beta2'

@@ -8,7 +8,7 @@ public class GankFactory {
     protected static final Object o = new Object();
     public static GankApi sGankSingleton = null;
 
-    public static final int meizhiSize = 10;
+    public static final int meizhiSize = 100;
 
     public static GankApi getGankSingleton() {
         synchronized (o) {

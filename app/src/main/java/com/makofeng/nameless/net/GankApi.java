@@ -22,4 +22,29 @@ public interface GankApi {
             @Path("month") int month,
             @Path("day") int day);
 
+
+
+
+//        Observable<GankData> gankDataObservable = mGank.getGankData(2015, 12, 10);
+//
+//        Subscription s = gankDataObservable
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new Subscriber<GankData>() {
+//                    @Override
+//                    public void onCompleted() {
+//                        L.i(TAG, "onCompleted");
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable e) {
+//                        L.i(TAG, "onError" + e);
+//                    }
+//
+//                    @Override
+//                    public void onNext(GankData gankData) {
+//                        L.i(TAG, "onNext" + gankData.results.androidList.get(0).url);
+//                    }
+//                });
+//        addSubscription(s);
 }

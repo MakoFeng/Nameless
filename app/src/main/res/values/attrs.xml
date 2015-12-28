@@ -13,4 +13,9 @@
         </attr>
     </declare-styleable>
 
+
+    <declare-styleable name="CustomSwipeRefreshLayout">
+        <attr name="scrollableChildId" format="reference" />
+    </declare-styleable>
+
 </resources>

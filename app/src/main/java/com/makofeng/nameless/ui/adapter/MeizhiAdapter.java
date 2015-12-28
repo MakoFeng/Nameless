@@ -5,11 +5,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.makofeng.nameless.R;
 import com.makofeng.nameless.model.Meizhi;
+import com.makofeng.nameless.utils.DateUtils;
+import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
@@ -26,7 +30,7 @@ public class MeizhiAdapter extends RecyclerView.Adapter<MeizhiAdapter.MeizhiView
 
     public MeizhiAdapter(Context context) {
         this.context = context;
-
+        meizhiList=new ArrayList<>();
     }
 
     public void setData(List<Meizhi> meizhiList){
@@ -35,12 +39,12 @@ public class MeizhiAdapter extends RecyclerView.Adapter<MeizhiAdapter.MeizhiView
     }
 
 
-
     public void addItems(List<Meizhi> list) {
 
         for(Meizhi itemModel : list) {
             meizhiList.add(itemModel);
         }
+
         notifyDataSetChanged();
     }
 
@@ -54,7 +58,12 @@ public class MeizhiAdapter extends RecyclerView.Adapter<MeizhiAdapter.MeizhiView
 
     @Override
     public void onBindViewHolder(MeizhiViewHolder holder, int position) {
-        holder.name.setText(meizhiList.get(position).desc);
+
+        String date= DateUtils.toDate(meizhiList.get(position).publishedAt);
+
+        holder.tvName.setText(date);
+
+        Picasso.with(context).load(meizhiList.get(position).url).fit().centerCrop().into(holder.ivImg);
     }
 
     @Override
@@ -64,8 +73,10 @@ public class MeizhiAdapter extends RecyclerView.Adapter<MeizhiAdapter.MeizhiView
 
     class MeizhiViewHolder extends RecyclerView.ViewHolder {
 
-        @Bind(R.id.name)
-        TextView name;
+        @Bind(R.id.tv_name)
+        TextView tvName;
+        @Bind(R.id.iv_img)
+        ImageView ivImg;
 
         public MeizhiViewHolder(View view) {
             super(view);

@@ -6,6 +6,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 
 import com.makofeng.nameless.R;
 import com.makofeng.nameless.model.MeizhiData;
@@ -13,6 +14,10 @@ import com.makofeng.nameless.mvp.presenter.MeizhiPresenter;
 import com.makofeng.nameless.mvp.views.MeizhiView;
 import com.makofeng.nameless.ui.adapter.MeizhiAdapter;
 import com.makofeng.nameless.widget.MultiStateView;
+import com.makofeng.nameless.widget.RecyclerView.HeaderAndFooterRecyclerViewAdapter;
+import com.makofeng.nameless.widget.RecyclerView.RecyclerFooterView;
+import com.makofeng.nameless.widget.RecyclerView.RecyclerOnScrollListener;
+import com.makofeng.nameless.widget.RecyclerView.RecyclerViewUtils;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -32,6 +37,9 @@ public class MainActivity extends MvpActivity<MeizhiView, MeizhiPresenter> imple
     SwipeRefreshLayout swipeRefresh;
 
     private MeizhiAdapter adapter;
+    private HeaderAndFooterRecyclerViewAdapter mHeaderAndFooterRecyclerViewAdapter = null;
+
+    private boolean isShowFootView = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,39 +49,26 @@ public class MainActivity extends MvpActivity<MeizhiView, MeizhiPresenter> imple
         setSupportActionBar(toolbar);
         initView();
         presenter.initData(true);
-
-//        Observable<GankData> gankDataObservable = mGank.getGankData(2015, 12, 10);
-//
-//        Subscription s = gankDataObservable
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(new Subscriber<GankData>() {
-//                    @Override
-//                    public void onCompleted() {
-//                        L.i(TAG, "onCompleted");
-//                    }
-//
-//                    @Override
-//                    public void onError(Throwable e) {
-//                        L.i(TAG, "onError" + e);
-//                    }
-//
-//                    @Override
-//                    public void onNext(GankData gankData) {
-//                        L.i(TAG, "onNext" + gankData.results.androidList.get(0).url);
-//                    }
-//                });
-//        addSubscription(s);
-
-
     }
 
     private void initView() {
         swipeRefresh.setOnRefreshListener(this);
         rvMeizhi.setLayoutManager(new LinearLayoutManager(this));
         adapter = new MeizhiAdapter(this);
-        rvMeizhi.setAdapter(adapter);
+        mHeaderAndFooterRecyclerViewAdapter = new HeaderAndFooterRecyclerViewAdapter(adapter);
+        rvMeizhi.setAdapter(mHeaderAndFooterRecyclerViewAdapter);
+        showFootView(true);
+        rvMeizhi.addOnScrollListener(mOnScrollListener);
     }
+
+    private RecyclerOnScrollListener mOnScrollListener = new RecyclerOnScrollListener() {
+
+        @Override
+        public void onLoadNextPage(View view) {
+            super.onLoadNextPage(view);
+            presenter.loadForMore();
+        }
+    };
 
     @NonNull
     @Override
@@ -110,15 +105,25 @@ public class MainActivity extends MvpActivity<MeizhiView, MeizhiPresenter> imple
     @Override
     public void showFootView(boolean b) {
 
+        isShowFootView = b;
+
+        if (b){
+            RecyclerViewUtils.setFooterView(rvMeizhi, new RecyclerFooterView(this));
+        }else {
+            RecyclerViewUtils.removeFooterView(rvMeizhi);
+        }
+
+
     }
 
     @Override
     public void loadMoreData(MeizhiData data) {
-
+        adapter.addItems(data.results);
     }
 
     @Override
     public void onRefresh() {
         presenter.initData(false);
+        showFootView(true);
     }
 }
