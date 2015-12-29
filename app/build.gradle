@@ -15,9 +15,9 @@ android {
     signingConfigs {
         sign {
             storeFile file('Nameless.keystore')
-            storePassword '......'
-            keyAlias '......'
-            keyPassword '......'
+            storePassword '458699031'
+            keyAlias 'Nameless'
+            keyPassword '458699031'
         }
     }
 

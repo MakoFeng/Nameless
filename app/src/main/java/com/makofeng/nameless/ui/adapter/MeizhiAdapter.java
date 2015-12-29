@@ -1,6 +1,7 @@
 package com.makofeng.nameless.ui.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import com.makofeng.nameless.R;
 import com.makofeng.nameless.model.Meizhi;
+import com.makofeng.nameless.ui.ImageGalleryActivity;
 import com.makofeng.nameless.utils.DateUtils;
 import com.squareup.picasso.Picasso;
 
@@ -30,10 +32,10 @@ public class MeizhiAdapter extends RecyclerView.Adapter<MeizhiAdapter.MeizhiView
 
     public MeizhiAdapter(Context context) {
         this.context = context;
-        meizhiList=new ArrayList<>();
+        meizhiList = new ArrayList<>();
     }
 
-    public void setData(List<Meizhi> meizhiList){
+    public void setData(List<Meizhi> meizhiList) {
         this.meizhiList = meizhiList;
         notifyDataSetChanged();
     }
@@ -41,7 +43,7 @@ public class MeizhiAdapter extends RecyclerView.Adapter<MeizhiAdapter.MeizhiView
 
     public void addItems(List<Meizhi> list) {
 
-        for(Meizhi itemModel : list) {
+        for (Meizhi itemModel : list) {
             meizhiList.add(itemModel);
         }
 
@@ -57,13 +59,29 @@ public class MeizhiAdapter extends RecyclerView.Adapter<MeizhiAdapter.MeizhiView
     }
 
     @Override
-    public void onBindViewHolder(MeizhiViewHolder holder, int position) {
+    public void onBindViewHolder(MeizhiViewHolder holder, final int position) {
 
-        String date= DateUtils.toDate(meizhiList.get(position).publishedAt);
+        final String date = DateUtils.toDate(meizhiList.get(position).publishedAt);
 
         holder.tvName.setText(date);
 
         Picasso.with(context).load(meizhiList.get(position).url).fit().centerCrop().into(holder.ivImg);
+
+        holder.ivImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ArrayList<String> images = new ArrayList<String>();
+
+                images.add(meizhiList.get(position).url);
+
+                Intent intent = new Intent(context, ImageGalleryActivity.class);
+                intent.putExtra("title", date);
+
+                intent.putStringArrayListExtra("images", images);
+                context.startActivity(intent);
+            }
+        });
+
     }
 
     @Override
@@ -83,5 +101,7 @@ public class MeizhiAdapter extends RecyclerView.Adapter<MeizhiAdapter.MeizhiView
             ButterKnife.bind(this, view);
 
         }
+
+
     }
 }

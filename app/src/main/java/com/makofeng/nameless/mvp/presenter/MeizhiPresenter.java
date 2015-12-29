@@ -2,6 +2,7 @@ package com.makofeng.nameless.mvp.presenter;
 
 import com.makofeng.nameless.model.MeizhiData;
 import com.makofeng.nameless.mvp.views.MeizhiView;
+import com.makofeng.nameless.net.GankFactory;
 import com.makofeng.nameless.utils.L;
 
 import rx.Observable;
@@ -26,7 +27,6 @@ public class MeizhiPresenter extends MvpRxPresenter<MeizhiView> {
             getView().showLoading();
 
         mPage = 1;
-
         requestData(mPage, false);
 
     }
@@ -76,7 +76,7 @@ public class MeizhiPresenter extends MvpRxPresenter<MeizhiView> {
                             }
 
 
-                            if (meizhiData.results.size() < 100) {
+                            if (meizhiData.results.size() < GankFactory.meizhiSize) {
                                 getView().showFootView(false);
                             } else {
                                 getView().showFootView(true);
