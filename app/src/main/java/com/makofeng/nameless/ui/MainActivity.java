@@ -39,8 +39,6 @@ public class MainActivity extends MvpActivity<MeizhiView, MeizhiPresenter> imple
     private MeizhiAdapter adapter;
     private HeaderAndFooterRecyclerViewAdapter mHeaderAndFooterRecyclerViewAdapter = null;
 
-    private boolean isShowFootView = true;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -104,8 +102,6 @@ public class MainActivity extends MvpActivity<MeizhiView, MeizhiPresenter> imple
 
     @Override
     public void showFootView(boolean b) {
-
-        isShowFootView = b;
 
         if (b){
             RecyclerViewUtils.setFooterView(rvMeizhi, new RecyclerFooterView(this));

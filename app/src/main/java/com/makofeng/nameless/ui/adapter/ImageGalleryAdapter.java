@@ -9,7 +9,6 @@ import android.widget.ImageView;
 
 import com.makofeng.nameless.R;
 import com.makofeng.nameless.utils.AndroidUtils;
-import com.makofeng.nameless.utils.L;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -22,7 +21,7 @@ public class ImageGalleryAdapter extends PagerAdapter {
 
     private Context mContext;
 
-    public ImageGalleryAdapter(List<String> images,Context mContext) {
+    public ImageGalleryAdapter(List<String> images, Context mContext) {
         this.mImages = images;
         this.mContext = mContext;
     }
@@ -38,17 +37,12 @@ public class ImageGalleryAdapter extends PagerAdapter {
 
         String image = mImages.get(position);
 
-        L.i(TAG,"image"+image);
-
-        Picasso.with(mContext).load(image).fit().centerCrop().into(imageView);
-
-
         int width = AndroidUtils.getScreenWidth(mContext);
 
-            Picasso.with(imageView.getContext())
-                    .load(image)
-                    .resize(width, 0)
-                    .into(imageView);
+        Picasso.with(imageView.getContext())
+                .load(image)
+                .resize(width, 0)
+                .into(imageView);
 
         container.addView(view, 0);
 

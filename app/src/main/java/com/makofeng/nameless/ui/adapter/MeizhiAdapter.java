@@ -11,11 +11,13 @@ import android.widget.TextView;
 
 import com.makofeng.nameless.R;
 import com.makofeng.nameless.model.Meizhi;
+import com.makofeng.nameless.ui.GankActivity;
 import com.makofeng.nameless.ui.ImageGalleryActivity;
 import com.makofeng.nameless.utils.DateUtils;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import butterknife.Bind;
@@ -54,8 +56,7 @@ public class MeizhiAdapter extends RecyclerView.Adapter<MeizhiAdapter.MeizhiView
     @Override
     public MeizhiViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.meizhi_item, parent, false);
-        MeizhiViewHolder meizhiViewHolder = new MeizhiViewHolder(view);
-        return meizhiViewHolder;
+        return new MeizhiViewHolder(view);
     }
 
     @Override
@@ -74,11 +75,39 @@ public class MeizhiAdapter extends RecyclerView.Adapter<MeizhiAdapter.MeizhiView
 
                 images.add(meizhiList.get(position).url);
 
+
+
+
                 Intent intent = new Intent(context, ImageGalleryActivity.class);
                 intent.putExtra("title", date);
-
                 intent.putStringArrayListExtra("images", images);
                 context.startActivity(intent);
+
+            }
+        });
+
+        holder.tvName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Calendar calendar = Calendar.getInstance();
+
+                calendar.setTime(meizhiList.get(position).publishedAt);
+
+                int year = calendar.get(Calendar.YEAR);
+
+                int month = calendar.get(Calendar.MONTH) + 1;
+
+                int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+                Intent intent = new Intent(context, GankActivity.class);
+                intent.putExtra("title",date);
+                intent.putExtra("year", year);
+                intent.putExtra("month", month);
+                intent.putExtra("day", day);
+                intent.putExtra("url", meizhiList.get(position).url);
+                context.startActivity(intent);
+
             }
         });
 
@@ -99,9 +128,7 @@ public class MeizhiAdapter extends RecyclerView.Adapter<MeizhiAdapter.MeizhiView
         public MeizhiViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
-
         }
-
 
     }
 }

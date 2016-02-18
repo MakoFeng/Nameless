@@ -5,6 +5,8 @@
                                     android:layout_height="wrap_content"
                                     android:foreground="?android:attr/selectableItemBackground"
                                     app:cardCornerRadius="3dp"
+                                    app:cardPreventCornerOverlap="false"
+                                    app:cardUseCompatPadding="true"
                                     app:cardElevation="8dp">
 
 
@@ -25,6 +27,8 @@
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:gravity="center_vertical"
+            android:background="?attr/selectableItemBackground"
+            android:textAppearance="?android:attr/textAppearanceSmall"
             android:paddingLeft="8dp"/>
 
 
